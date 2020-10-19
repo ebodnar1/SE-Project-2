@@ -6,7 +6,7 @@ public class ArrayQueue<E> {
     int length = 0;
     int CAP = 30;
 
-    //Constructor 
+    //Constructor
     public ArrayQueue(int capacity){
         data = (E[]) new Object[capacity];
     }
@@ -16,19 +16,9 @@ public class ArrayQueue<E> {
         new ArrayQueue(CAP);
     }
 
-    //Returns currentl length of the queue
-    public int getLength(){
-        return length;
-    }
-
     //Checks if the queue is empty
     public boolean isEmpty(){
-        if(data.length == 0){
-            return true;
-        }
-        else{
-            return false;
-        }
+        return length == 0;
     }
 
     /*
@@ -36,7 +26,9 @@ public class ArrayQueue<E> {
     Uses modulus operator for wraparound to see if there is room in the queue
     */
     public void enqueue(E elem) throws IndexOutOfBoundsException{
-        checkValid(length);
+        if(length >= data.length){
+            throw new IndexOutOfBoundsException("Queue is full!");
+        }
         int space = (front + length) % data.length;
         data[space] = elem;
         length ++;
@@ -44,7 +36,7 @@ public class ArrayQueue<E> {
 
     /*
     Removes an element from the front of the queue, throwing an excpetion if the queue is empty already
-    front = (front + 1) % queue.length is used to change the index of the front value (whuich represents the index of the last element in the queue)
+    front = (front + 1) % queue.length is used to change the index of the front value (which represents the index of the last element in the queue)
     */
     public E dequeue(){
         if(isEmpty()){
@@ -55,15 +47,5 @@ public class ArrayQueue<E> {
         front = (front + 1) % data.length;
         length --;
         return temp;
-    }
-
-    //Method to detect any errors in enqueue or dequeue, throwing an error if any are detected
-    public void checkValid(int index){
-        if(index >= data.length){
-            throw new IndexOutOfBoundsException("Queue is full!");
-        }
-        else if(index < 0){
-            throw new IndexOutOfBoundsException("Not a valid input!");
-        }
     }
 }
