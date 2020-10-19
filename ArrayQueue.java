@@ -19,19 +19,9 @@ public class ArrayQueue<E> {
         size = capacity;
     }
 
-    //Returns current length of the queue
-    public int getLength(){
-        return length;
-    }
-
     //Checks if the queue is empty
     public boolean isEmpty(){
-        if(length == 0){
-            return true;
-        }
-        else{
-            return false;
-        }
+        return length == 0;
     }
 
     /*
@@ -44,6 +34,11 @@ public class ArrayQueue<E> {
         }
         int idx = (front + length) % size;
         queue[idx] = elem;
+        if(length >= queue.length){
+            throw new IndexOutOfBoundsException("Queue is full!");
+        }
+        int space = (front + length) % queue.length;
+        queue[space] = elem;
         length ++;
     }
 
@@ -59,6 +54,7 @@ public class ArrayQueue<E> {
         queue[front] = null;
         front = (front + 1) % size;
         length --;
+
         return first;
     }
 }
