@@ -1,4 +1,4 @@
-// Constructor function that creates 3D point sing x, y, z coordinates
+// Constructor function that creates 3D point using x, y, z coordinates
 function Point(x,y,z){
     this.x = x;
     this.y = y;
@@ -7,7 +7,7 @@ function Point(x,y,z){
     // Method to calculate and return distance between this point object and another
     this.calcDistance = function (point) {
         let xsquare = Math.pow((this.x - point.x),2);
-        let ysquare = Math.pow((this.y=point.y),2);
+        let ysquare = Math.pow((this.y - point.y),2);
         let zsquare = Math.pow((this.z - point.y), 2)
         
         let dist = Math.sqrt(xsquare + ysquare + zsquare);
